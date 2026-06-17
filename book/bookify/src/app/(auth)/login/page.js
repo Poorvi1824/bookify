@@ -88,7 +88,7 @@ const router=useRouter();
 
    {/* heading */}
   <div className="flex flex-col">
-   <span className="text-black text-text32 font-semibold ">Hey there! ready to get back to business?</span>
+   <span className="text-black text-text32  ">Hey there! ready to get back to business?</span>
 <span className="text-black text-text">Please share the contact details of your business</span>    
   </div>
 
