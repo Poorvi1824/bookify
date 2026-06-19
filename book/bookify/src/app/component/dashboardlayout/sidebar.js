@@ -67,7 +67,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
   </div>
 
       {/* Scrollable Main Navigation */}
-      <nav className="flex-1 overflow-y-scroll w-full py-4 px-3 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-gray-100">
+      <nav className="flex-1 overflow-y-scroll w-full py-4 px-3 scrollbar-thin cuustom-scrollbar">
         <div className="flex flex-col gap-1 w-full relative">
           {sideMenuBar.map((item, index) => {
             const Icon = item.icon;

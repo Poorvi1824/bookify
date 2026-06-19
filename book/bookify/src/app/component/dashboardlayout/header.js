@@ -49,7 +49,7 @@ const Header = ({ isCollapsed }) => {
       <div className="flex items-center gap-2" >
 {/* Profile Picture */}
         <div className="w-10 h-10 rounded-full overflow-hidden">
-          <img src="user.avif" alt="Profile" className="w-full h-full object-cover" />
+          <img src="user.jpg" alt="Profile" className="w-full h-full object-cover" />
         </div>
         {/* Logout */}
         <button className="px-3 py-1.5 rounded-full text-red-500 rounded-lg hover:bg-red-600 transition">

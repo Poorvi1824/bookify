@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }) => {
 
         {/* Content */}
         {/* Main content: pt-16 (64px = h-16) to push content below fixed header */}
-  <main className="pt-16 h-screen overflow-y-auto">
+  <main className="pt-16 h-screen overflow-y-auto custom-scrollbar">
     {/* Your scrollable content goes here */}
     
       {/* Content */}
