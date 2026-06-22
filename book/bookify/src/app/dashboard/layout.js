@@ -9,9 +9,9 @@ const DashboardLayout = ({ children }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="w-full h-screen flex bg-white">
+    <div className="w-full h-screen flex bg-white overflow-hidden">
       
-      {/* Sidebar - width transitions with sidebar state */}
+      {/* Sidebar */}
       <div
         className={`h-full border-r border-gray-200 flex-shrink-0 transition-all duration-300 ease-in-out ${
           isCollapsed ? "w-20" : "w-60"
@@ -20,16 +20,20 @@ const DashboardLayout = ({ children }) => {
         <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       </div>
 
-      {/* Main area - grows automatically when sidebar shrinks */}
+      {/* Main area */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         
-        {/* Header */}
-        <Header />
-        
+        {/* Header - fixed with dynamic left offset */}
+        <Header isCollapsed={isCollapsed} />
+
         {/* Content */}
-        <Main className="flex-1 overflow-y-auto p-4">
-          {children}
-        </Main>
+        {/* Main content: pt-16 (64px = h-16) to push content below fixed header */}
+  <main className="pt-16 h-screen bg-gray-100 overflow-y-auto custom-scrollbar">
+    {/* Your scrollable content goes here */}
+    
+      {/* Content */}
+    {children}
+  </main>
         
       </div>
     </div>

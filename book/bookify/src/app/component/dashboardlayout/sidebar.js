@@ -18,11 +18,13 @@ import {
   Settings,
   Sparkles,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
   const [active, setActive] = useState("Dashboard");
   const [moreActive, setMoreActive] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const router = useRouter();
 
   const sideMenuBar = [
     { name: "Dashboard", icon: LayoutDashboard },
@@ -41,34 +43,31 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     { name: "Settings", icon: Settings },
   ];
 
+ 
+
+
   return (
-    <aside
-      className={`h-full bg-white flex flex-col transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-20" : "w-60"
-      }`}
+  // In your sidebar, keep the <aside> simple - let the parent control width
+<aside className="h-full bg-white flex flex-col w-full">
+  {/* Header */}
+  <div className="h-16 w-full flex items-center px-4 border-b border-gray-200 shrink-0">
+    {/* Logo */}
+    <div className={`flex items-center gap-3 overflow-hidden transition-all duration-300 ${isCollapsed ? "w-0 opacity-0" : "w-40 opacity-100"}`}>
+      <img src="/logo.avif" alt="logo" className="w-8 h-8 shrink-0" />
+      <span className="text-lg text-gray-900 font-bold whitespace-nowrap">Fitracker</span>
+    </div>
+    
+    {/* Toggle - ml-auto pushes right when expanded, mx-auto centers when collapsed */}
+    <button
+      onClick={() => setIsCollapsed(!isCollapsed)}
+      className={`w-8 h-8 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors shrink-0 ${isCollapsed ? "mx-auto" : "ml-auto"}`}
     >
-      {/* Header */}
-      <div className="h-16 w-full flex justify-between items-center px-4 border-b  border-gray-200 shrink-0">
-        <div
-          className={`flex items-center gap-3 overflow-hidden transition-all duration-300 ${
-            isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
-          }`}
-        >
-          <img src="/logo.avif" alt="logo" className="w-8 h-8 shrink-0" />
-          <span className="text-lg text-gray-900 font-bold whitespace-nowrap">
-            Fitracker
-          </span>
-        </div>
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="w-8 h-8 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors shrink-0"
-        >
-          {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-        </button>
-      </div>
+      {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+    </button>
+  </div>
 
       {/* Scrollable Main Navigation */}
-      <nav className="flex-1 overflow-y-auto w-full py-4 px-3 scrollbar-thin">
+      <nav className="flex-1 overflow-y-scroll w-full py-4 px-3 scrollbar-thin cuustom-scrollbar">
         <div className="flex flex-col gap-1 w-full relative">
           {sideMenuBar.map((item, index) => {
             const Icon = item.icon;
@@ -76,11 +75,19 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             return (
               <button
                 key={item.name}
-                onClick={() => setActive(item.name)}
+                onClick={() => {
+                  setActive(item.name);
+                  const path =
+                    item.name === "Dashboard"
+                      ? "/dashboard"
+                      : `/dashboard/${item.name.toLowerCase()}`;
+
+                  router.push(path);
+  }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative
-                  ${isActive ? "bg-black text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"}
+                className={`w-full flex items-center gap-3 px-3 font-semibold py-2.5 rounded-xl transition-all duration-200 group relative
+                  ${isActive ? "bg-black text-white" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}
                   ${isCollapsed ? "justify-center px-2" : ""}
                 `}
                 title={isCollapsed ? item.name : undefined}
@@ -98,9 +105,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                   className={`shrink-0 ${isActive ? "text-white" : "text-gray-400 group-hover:text-gray-600"}`}
                 />
                 <span
-                  className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${
-                    isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
-                  }`}
+                  className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
+                    }`}
                 >
                   {item.name}
                 </span>
@@ -132,9 +138,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       {/* More Settings */}
       <div className="w-full py-3 px-3 border-t border-gray-200 shrink-0">
         <div
-          className={`px-3 mb-2 transition-all duration-300 overflow-hidden ${
-            isCollapsed ? "h-0 opacity-0" : "h-auto opacity-100"
-          }`}
+          className={`px-3 mb-2 transition-all duration-300 overflow-hidden ${isCollapsed ? "h-0 opacity-0" : "h-auto opacity-100"
+            }`}
         >
           <span className="text-xs font-semibold tracking-wider text-gray-400 uppercase">
             More Settings
@@ -156,9 +161,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             className={`shrink-0 ${moreActive === "More Menus" ? "text-white" : "text-gray-400"}`}
           />
           <span
-            className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${
-              isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
-            }`}
+            className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
+              }`}
           >
             More Menus
           </span>
@@ -186,9 +190,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                   className={`shrink-0 ${isBottomActive ? "text-white" : "text-gray-400"}`}
                 />
                 <span
-                  className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${
-                    isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
-                  }`}
+                  className={`font-medium text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
+                    }`}
                 >
                   {item.name}
                 </span>
