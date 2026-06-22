@@ -99,6 +99,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -133,7 +134,8 @@ export default function SignUpPage() {
         domain: domainname,
       }, { merge: true });
 
-      alert("Sign up successful!");
+    toast.success("Sign up successful!");
+
       router.push("/dashboard");
 
     } catch (err) {

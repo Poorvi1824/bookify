@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -53,8 +53,7 @@ export default function LoginPage() {
 
       console.log(auth.currentUser);
 
-      alert("Login successful!");
-
+    toast.success("Login successful!");
 
       // 👉 Optional redirect
       router.push("/dashboard");
