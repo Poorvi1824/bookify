@@ -1,12 +1,45 @@
+
+"use client";
+
 import React from "react";
-import { MessageCircle, Mail, Phone, Bell, MapPin,LogOut } from "lucide-react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+import { useRouter } from "next/navigation";
+
+import { MessageCircle, Mail, Phone, Bell, MapPin, LogOut } from "lucide-react";
+
 
 const Header = ({ isCollapsed }) => {
+  const router = useRouter();
+
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+
+      // Remove token cookie
+      document.cookie =
+        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout Error:", error);
+    }
+  };
+
+
+
   // Sidebar widths: collapsed = 80px (w-20), expanded = 240px (w-60)
   const sidebarWidth = isCollapsed ? 80 : 240;
 
+
+
+
+
+
+
   return (
-    <div 
+    <div
       className="fixed top-0 z-50 h-16 bg-white flex items-center justify-end gap-4 px-4 border-b border-gray-200 flex-shrink-0 transition-all duration-300 ease-in-out"
       style={{
         left: `${sidebarWidth}px`,      // Push from left by sidebar width
@@ -15,7 +48,7 @@ const Header = ({ isCollapsed }) => {
     >
 
       <div className="flex items-center gap-2">
-        
+
         {/* WhatsApp */}
         <button className="p-2 rounded-full text-gray-600 hover:text-green-500 hover:bg-green-50 transition">
           <MessageCircle className="w-5 h-5" />
@@ -47,12 +80,15 @@ const Header = ({ isCollapsed }) => {
 
       </div>
       <div className="flex items-center gap-2" >
-{/* Profile Picture */}
+        {/* Profile Picture */}
         <div className="w-10 h-10 rounded-full overflow-hidden">
           <img src="user.jpg" alt="Profile" className="w-full h-full object-cover" />
         </div>
         {/* Logout */}
-        <button className="px-3 py-1.5 rounded-full text-red-500 rounded-lg hover:bg-red-600 transition">
+        <button
+          onClick={handleLogout}
+          className="px-3 py-1.5 rounded-lg text-red-500 hover:bg-red-50 transition"
+        >
           <LogOut className="w-5 h-5" />
         </button>
       </div>
