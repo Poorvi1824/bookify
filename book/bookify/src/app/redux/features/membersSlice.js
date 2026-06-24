@@ -3,23 +3,24 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 
 // Async Thunk
-export const fetchUsers = createAsyncThunk(
-  "users/fetchUsers",
+export const fetchMembers = createAsyncThunk(
+  "members/fetchMembers",
   async (_, { rejectWithValue }) => {
-    console.log("thunk called");
+    // console.log("thunk called");
     try {
-      console.log("Fetching users from Firestore...");
-      const userCollection = await getDocs(collection(db, "users"));
+      console.log("Fetching members from Firestore...");
+      const userCollection = await getDocs(collection(db, "Members"));
 
       console.log("Snapshot size:", userCollection.size);
 
-      const users = userCollection.docs.map((doc) => ({
+      const members = userCollection.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-       
+        joinedDate: doc.data().joinedDate?.toDate().toISOString(),
+         lastday: doc.data().lastday?.toDate().toISOString(),
       }));
-      console.log("Fetched Users:", users);
-      return users;
+      console.log("Fetched Members:", members);
+      return members;
     } catch (error) {
       console.error("FIRESTORE ERROR:", error);
       console.error("ERROR MESSAGE:", error.message);
@@ -29,8 +30,8 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-const userSlice = createSlice({
-  name: "users",
+const membersSlice = createSlice({
+  name: "members",
   initialState: {
     users: [],
     loading: false,
@@ -42,25 +43,25 @@ const userSlice = createSlice({
     builder
 
       // Pending
-      .addCase(fetchUsers.pending, (state) => {
+      .addCase(fetchMembers.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
 
       // Success
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(fetchMembers.fulfilled, (state, action) => {
         state.loading = false;
         state.users = action.payload;
       })
 
       // Error
-      .addCase(fetchUsers.rejected, (state, action) => {
+      .addCase(fetchMembers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const usersReducer = userSlice.reducer;
+export const membersReducer = membersSlice.reducer;
 
 

@@ -1,7 +1,11 @@
 "use client"
 
-import { useState } from 'react';
-import { ChevronDown, Calendar, CircleDollarSign, UserCheck, BookOpen, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ChevronDown, Calendar, CircleDollarSign, UserCheck, BookOpen, Users, CheckCircle } from 'lucide-react';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers } from '@/app/redux/features/membersSlice';
+
+
 
 const days = [
   { name: "Today", value: 0 },
@@ -20,6 +24,57 @@ const OverviewDashboard = () => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [isOpen, setIsOpen] = useState(false);
+
+
+
+
+  const dispatch = useDispatch();
+
+  // const { users, loading, error } = useSelector(
+  //   (state) => state.users
+  // );
+
+  useEffect(() => {
+    console.log("Dispatching fetchMembers...");
+    dispatch(fetchMembers());
+  }, [dispatch]);
+
+  const memberlist = useSelector((state) => state.members.users);
+  console.log("Members from Redux:", memberlist);
+
+  const getStatusConfig = (status) => {
+    switch (status?.toLowerCase()) {
+      case "member":
+        return {
+          bg: "bg-green-400",
+          text: "text-green-500",
+          icon: <CheckCircle className="text-white text-sm" />,
+        };
+
+      case "membership finished":
+        return {
+          bg: "bg-red-400",
+          text: "text-red-500",
+          icon: <CheckCircle className="text-white text-sm" />,
+        };
+
+      case "pending":
+        return {
+          bg: "bg-yellow-400",
+          text: "text-yellow-500",
+          icon: <CheckCircle className="text-white text-sm" />,
+        };
+
+      default:
+        return {
+          bg: "bg-gray-400",
+          text: "text-gray-600",
+          icon: null,
+        };
+    }
+  };
+
+
 
   return (
     <>
@@ -108,17 +163,20 @@ const OverviewDashboard = () => {
             <h6 className=" text-25 font-light">Today's Classes</h6>
             <span className="text-sm text-gray-500">0 classes scheduled for today</span>
           </div>
-         {/* <div className="w-full  h-0 text-black mt-2 border-t border-t-gray-200"></div> */}
-         
-         {/*classes sheduled for today*/}
-         
-          <div>h</div>
+          {/* <div className="w-full  h-0 text-black mt-2 border-t border-t-gray-200"></div> */}
+
+          {/*classes sheduled for today*/}
+
+          <div className="p-4 m-4 flex flex-col items-center justify-center">
+            <Calendar className="w-10 h-10 text-gray-300 mb-2" />
+            <p className=" text-sm text-gray-600">No classes scheduled for today</p>
+          </div>
 
         </div>
 
 
 
-{/* Live Updates Block */}
+        {/* Live Updates Block */}
         <div className='flex-1  h-100 bg-white rounded-lg shadow-md text-lg font-bold mb-2'>
 
 
@@ -126,11 +184,36 @@ const OverviewDashboard = () => {
           <div className="flex flex-col boder-b border-b-gray-200 mb-2 p-4 ">
             <span className="text-25 text-gray-800 ">Recent Activity</span>
             <span className="text-sm text-gray-500">Live updates from your gym</span>
-            
+
           </div>
           <div className="w-full  h-0 text-black mt-2 border-t border-t-gray-200"></div>
-          
+
+          <div className="p-4">
+
+            {memberlist.map((member) => {
+              const { bg, text, icon } = getStatusConfig(member.Status);
+
+              return (
+                <div key={member.id} className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-5">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center ${bg}`}
+                    >
+                      {icon}
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className=" text-sm text-gray-600">{member.memberName}</span>
+                      <span className="text-sm font-light text-gray-400 ">
+                        {member.Status}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
+        </div>
       </div>
 
 

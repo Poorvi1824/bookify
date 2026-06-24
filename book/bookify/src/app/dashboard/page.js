@@ -2,12 +2,12 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Building2 } from 'lucide-react';
 import OverviewDashboard from "../component/dashboard/overviewDasboard";
 import Announcements from "../component/dashboard/annoucement";
 import GettingStarted from "../component/dashboard/getstart";
-import { useDispatch, useSelector } from "react-redux";
+
 
 const DashboardPage = () => {
 
@@ -20,13 +20,7 @@ const DashboardPage = () => {
     { name: "Announcements", component: <Announcements /> },
 
   ]
-    const dispatch = useDispatch();
-
-  const { users, loading, error } = useSelector(
-    (state) => state.users
-  );
-  console.log("Users from Redux:", users);
-
+   
  const activeComponent = menuItems.find(item => item.name === active)?.component;
 
 
