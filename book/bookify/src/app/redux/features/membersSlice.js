@@ -11,14 +11,22 @@ export const fetchMembers = createAsyncThunk(
       console.log("Fetching members from Firestore...");
       const userCollection = await getDocs(collection(db, "Members"));
 
-      console.log("Snapshot size:", userCollection.size);
+      // console.log("Snapshot size:", userCollection.size);
 
-      const members = userCollection.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        joinedDate: doc.data().joinedDate?.toDate().toISOString(),
-         lastday: doc.data().lastday?.toDate().toISOString(),
-      }));
+      const members = userCollection.docs.map((doc) => {
+        const data = doc.data();
+
+        return {
+          id: doc.id,
+          ...data,
+          joiningdate: data.joiningdate
+            ? data.joiningdate.toDate().toISOString()
+            : null,
+          lastday: data.lastday
+            ? data.lastday.toDate().toISOString()
+            : null,
+        };
+      });
       console.log("Fetched Members:", members);
       return members;
     } catch (error) {

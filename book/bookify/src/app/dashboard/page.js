@@ -7,6 +7,8 @@ import { Building2 } from 'lucide-react';
 import OverviewDashboard from "../component/dashboard/overviewDasboard";
 import Announcements from "../component/dashboard/annoucement";
 import GettingStarted from "../component/dashboard/getstart";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "../redux/features/usersSlice";
 
 
 const DashboardPage = () => {
@@ -23,6 +25,21 @@ const DashboardPage = () => {
    
  const activeComponent = menuItems.find(item => item.name === active)?.component;
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      console.log("Dispatching users...");
+      try{
+ dispatch(fetchUsers());
+      }
+     catch(error){
+      console.error("Error dispatching fetchUsers:", error);
+     }
+    }, [dispatch]);
+  
+    const userlist = useSelector((state) => state.users.users);
+    console.log("Users from Redux:", userlist);
+
 
   return (
     <div className="w-full h-screen bg-gray-100">
@@ -34,7 +51,9 @@ const DashboardPage = () => {
             <Building2 className="h-10 w-10 text-gray-500 " />
           </div>
           <div className="flex flex-col">
-            <span className="text-black text-xl font-semibold">Hello, John</span>
+            {userlist.length > 0 && (
+              <span className="text-black text-xl font-semibold">Hello, {userlist[0].name}</span>
+            )}
             <span className="text-gray-500 text-sm">Fitness Gym</span>
           </div>
         </div>

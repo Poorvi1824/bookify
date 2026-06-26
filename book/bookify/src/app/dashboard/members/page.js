@@ -11,7 +11,9 @@ import {
   MoreVertical, 
   MapPin, 
   Calendar,
-  Briefcase
+  Briefcase,
+  Search,
+  FileSearch
 } from 'lucide-react';
 
 const Members = () => {
@@ -19,7 +21,14 @@ const Members = () => {
 
  useEffect(() => {
      console.log("Dispatching users...");
-     dispatch(fetchUsers());
+     try{
+ dispatch(fetchUsers());
+     }
+    catch(error){
+     console.error("Error dispatching fetchUsers:", error);
+    }
+
+    
    }, [dispatch]);
  
    const userlist = useSelector((state) => state.users.users);
@@ -27,8 +36,27 @@ const Members = () => {
  
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Members</h1>
+    <div className="p-6 m-6 bg-white rounded-lg shadow-md">
+
+<div className="w-full flex justify-between h-15  pt-2 px-6 mb-4 gap-4">
+  <div className=" flex gap-4 items center">
+      <h1 className="text-2xl font-bold mb-4">Gym Members ({userlist.length})</h1> 
+      <button className="bg-black text-white  text-sm px-3  rounded-lg ">
+       
+        Invite  (+)
+      </button></div>
+<div className="relative">
+  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+
+  <input
+    type="text"
+    placeholder="Search..."
+    className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
+</div>
+
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   {userlist.map((user) => (
     <div

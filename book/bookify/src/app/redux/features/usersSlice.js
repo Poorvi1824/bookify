@@ -11,13 +11,17 @@ export const fetchUsers = createAsyncThunk(
       console.log("Fetching users from Firestore...");
       const userCollection = await getDocs(collection(db, "users"));
 
-      console.log("Snapshot size:", userCollection.size);
+      // console.log("Snapshot size:", userCollection.size);
 
       const users = userCollection.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
+        
        
       }));
+//      userCollection.docs.forEach((doc) => {
+//     console.log(doc.data());
+// });
       console.log("Fetched Users:", users);
       return users;
     } catch (error) {

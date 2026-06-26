@@ -36,7 +36,11 @@ const OverviewDashboard = () => {
 
   useEffect(() => {
     console.log("Dispatching fetchMembers...");
-    dispatch(fetchMembers());
+    try{
+ dispatch(fetchMembers());
+    }
+    catch(error){ console.error("Error dispatching fetchMembers:", error);}
+   
   }, [dispatch]);
 
   const memberlist = useSelector((state) => state.members.users);
