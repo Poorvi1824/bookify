@@ -1,0 +1,37 @@
+import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { db } from "@/firebase/firebase";
+
+export const addClient = async (clientData) => {
+  try {
+    const docRef = await addDoc(collection(db, "clients"), {
+      firstName: clientData.firstName,
+      lastName: clientData.lastName,
+      email: clientData.email,
+      group: clientData.group,
+      dob: clientData.dob,
+      gender: clientData.gender,
+      phoneNumber: clientData.phoneNumber,
+      status: clientData.status || "Active",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+
+    return {
+      id: docRef.id,
+      success: true,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getClients = async () => {
+  const clientsRef = collection(db, "clients");
+  const q = query(clientsRef, orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
