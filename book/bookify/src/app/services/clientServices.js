@@ -25,13 +25,31 @@ export const addClient = async (clientData) => {
   }
 };
 
+// 
 export const getClients = async () => {
   const clientsRef = collection(db, "clients");
   const q = query(clientsRef, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+
+    return {
+      id: doc.id,
+      ...data,
+
+      createdAt: data.createdAt
+        ? data.createdAt.toDate().toISOString()
+        : null,
+
+      updatedAt: data.updatedAt
+        ? data.updatedAt.toDate().toISOString()
+        : null,
+
+      dob:
+        data.dob && typeof data.dob.toDate === "function"
+          ? data.dob.toDate().toISOString()
+          : data.dob,
+    };
+  });
 };

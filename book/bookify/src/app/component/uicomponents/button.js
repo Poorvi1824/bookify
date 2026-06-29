@@ -123,6 +123,7 @@ const Button = ({
   disabled = false,
   className = "",
   onClick,
+  iconClassName
 }) => {
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",
@@ -160,7 +161,12 @@ const Button = ({
         </>
       ) : (
         <>
-          {LeftIcon && <LeftIcon size={16} />}
+        {LeftIcon && (
+  <LeftIcon
+  size={16}
+    className={` ${iconClassName || ""}`}
+  />
+)}
           <span>{children}</span>
           {RightIcon && <RightIcon size={16} />}
         </>

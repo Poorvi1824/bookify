@@ -5,13 +5,13 @@
   --foreground: #171717;
 }
 
-@font-face {
+/* @font-face {
   font-family: "Outfit";
-  src: url("/fonts/Outfit/static/Outfit-semiBold.ttf") format("truetype");
-  font-weight: 600; /* SemiBold */
-  font-style: normal;
+  src: url("/fonts/Outfit/static/Outfit-semiBold.ttf") format("truetype"); */
+  /* font-weight: 600; SemiBold */
+  /* font-style: normal;
   font-display: swap;
-}
+} */
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
@@ -39,6 +39,7 @@
   --text-9: 9px;
   --text-10: 10px;
   --text-11: 11px;
+   --text-12: 12px;
   --text-13: 13px;
   --text-15: 15px;
   --text-20: 20px;
