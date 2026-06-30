@@ -3,6 +3,8 @@ import { membersReducer } from "./features/membersSlice";
 import { usersReducer } from "./features/usersSlice";
 import clientReducer from "./features/clients/clientsSlice";
 import staffReducer from "./features/booking/StaffSlice";
+import packageReducer from "./features/packages/pacakgesSlice";
+
 
 
 
@@ -11,6 +13,7 @@ export const store = configureStore({
     members: membersReducer,
     users: usersReducer,
     clients: clientReducer,
-    staff: staffReducer
+    staff: staffReducer,
+    packages: packageReducer,
   },
 });

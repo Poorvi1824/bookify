@@ -208,7 +208,7 @@ const handleRefresh = async () => {
         <div className="flex items-center justify-between py-4">
           {/* Left */}
           <div className="flex items-center gap-5">
-            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-sm">
+            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center font-light text-sm">
               {staff.Name
                 ?.trim()
                 .split(" ")
@@ -223,7 +223,7 @@ const handleRefresh = async () => {
               <span className="text-sm font-semibold">
                 {staff.Name}
               </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs font-light text-gray-500">
                 {staff.Profile}
               </span>
             </div>
