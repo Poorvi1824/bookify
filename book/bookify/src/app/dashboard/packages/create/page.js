@@ -15,6 +15,7 @@ const Create = () => {
           Configure your subscription package details
         </p>
       </div>
+      
       {/* basic details heading */}
       <div className="flex items-center gap-2 my-5 border-b pb-3">
   <Info size={18} className="text-gray-600" />
