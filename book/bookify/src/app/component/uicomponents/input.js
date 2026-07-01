@@ -37,6 +37,7 @@ const Input = ({
         disabled={disabled}
         className={`w-full rounded-lg border border-gray-300 px-4 py-3
         focus:outline-none
+  placeholder:text-black placeholder:font-extralight placeholder:text-sm
        
         transition-all
         ${error ? "border-red-500" : ""}

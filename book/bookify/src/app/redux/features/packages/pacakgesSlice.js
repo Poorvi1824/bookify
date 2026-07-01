@@ -1,5 +1,29 @@
-import { deletePackage, getPackages } from "@/app/services/packagesServices";
+import { addPackage, deletePackage, getPackages } from "@/app/services/packagesServices";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+
+
+
+
+// ==================== Create Package ====================
+export const createPackage = createAsyncThunk(
+  "packages/createPackage",
+  async (packageData, thunkAPI) => {
+    try {
+      console.log("packageData in createPackage:", packageData); // Debugging line
+      return await addPackage(packageData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+
+
+// fetchpacakeges
+
+
 
 
 export const fetchPackages = createAsyncThunk(
@@ -12,6 +36,8 @@ export const fetchPackages = createAsyncThunk(
     }
   }
 );
+
+//remove packages
 
 export const removePackage = createAsyncThunk(
   "packages/deletePackage",

@@ -7,9 +7,13 @@ const Select = ({
   onChange,
   options = [],
   required = false,
+ 
 }) => {
   return (
     <div className="w-full">
+
+      
+
 
       {label && (
         <label className="block mb-2 text-sm font-medium">
@@ -25,7 +29,7 @@ const Select = ({
         value={value}
         onChange={onChange}
         required={required}
-        className="w-full rounded-lg border border-gray-300 px-4 py-3  outline-none"
+        className="w-full rounded-lg border border-gray-300 px-4 py-3  outline-none placeholder:text-black placeholder:font-extralight placeholder:text-sm"
       >
         <option value="">Select {label}</option>
 
@@ -33,6 +37,7 @@ const Select = ({
           <option
             key={option.value}
             value={option.value}
+            className="text-gray-700 placeholder:text-black placeholder:font-extralight placeholder:text-sm"
           >
             {option.label}
           </option>
