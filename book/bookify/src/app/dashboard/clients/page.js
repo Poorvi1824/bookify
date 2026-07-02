@@ -1,6 +1,7 @@
 "use client";
 
-import AddClients from '@/app/component/clientscomponent/addClients';
+
+import AddClients from '@/app/component/clientscomponent/addclients';
 import ClientTable from '@/app/component/clientscomponent/clientTable';
 
 

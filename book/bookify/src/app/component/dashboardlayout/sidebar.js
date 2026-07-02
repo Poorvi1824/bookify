@@ -19,31 +19,40 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
-  const [active, setActive] = useState("Dashboard");
+ const pathname = usePathname();
   const [moreActive, setMoreActive] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const router = useRouter();
 
   const sideMenuBar = [
-    { name: "Dashboard", icon: LayoutDashboard },
-    { name: "Members", icon: Users },
-    { name: "Training Programs", icon: Dumbbell },
-    { name: "Classes", icon: BookOpen },
-    { name: "Clients", icon: UserCircle },
-    { name: "Booking", icon: Calendar },
-    { name: "Packages", icon: Package },
-    { name: "Transactions", icon: CreditCard },
-    { name: "Sales Analytics", icon: BarChart3 },
-  ];
+  { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+  { name: "Members", icon: Users, path: "/dashboard/members" },
+  { name: "Training Programs", icon: Dumbbell, path: "/dashboard/training-programs" },
+  { name: "Classes", icon: BookOpen, path: "/dashboard/classes" },
+  { name: "Clients", icon: UserCircle, path: "/dashboard/clients" },
+  { name: "Booking", icon: Calendar, path: "/dashboard/booking" },
+  { name: "Packages", icon: Package, path: "/dashboard/packages" },
+  { name: "Transactions", icon: CreditCard, path: "/dashboard/transactions" },
+  { name: "Sales Analytics", icon: BarChart3, path: "/dashboard/sales-analytics" },
+];
 
-  const bottomMenu = [
-    { name: "Billing", icon: BillingIcon },
-    { name: "Settings", icon: Settings },
-  ];
+ const bottomMenu = [
+  { name: "Billing", icon: BillingIcon, path: "/dashboard/billing" },
+  { name: "Settings", icon: Settings, path: "/dashboard/settings" },
+];
 
- 
+ const isMenuActive = (itemName) => {
+  const path =
+    itemName === "Dashboard"
+      ? "/dashboard"
+      : `/dashboard/${itemName.toLowerCase()}`;
+
+  return pathname.startsWith(path);
+};
+
 
 
   return (
@@ -71,18 +80,22 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         <div className="flex flex-col gap-1 w-full relative">
           {sideMenuBar.map((item, index) => {
             const Icon = item.icon;
-            const isActive = active === item.name;
+          const isActive =
+    item.path === "/dashboard"
+      ? pathname === "/dashboard"
+      : pathname.startsWith(item.path);
+
             return (
               <button
                 key={item.name}
                 onClick={() => {
-                  setActive(item.name);
-                  const path =
-                    item.name === "Dashboard"
-                      ? "/dashboard"
-                      : `/dashboard/${item.name.toLowerCase()}`;
+                  // setActive(item.name);
+                  // const path =
+                  //   item.name === "Dashboard"
+                  //     ? "/dashboard"
+                  //     : `/dashboard/${item.name.toLowerCase()}`;
 
-                  router.push(path);
+                  router.push(item.path);
   }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -173,12 +186,16 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
       <div className="w-full py-3 px-3 border-t border-gray-200 shrink-0">
         <div className="flex flex-col gap-1">
           {bottomMenu.map((item) => {
-            const Icon = item.icon;
-            const isBottomActive = active === item.name;
+           const Icon = item.icon;
+  const isBottomActive =  item.path === "/dashboard"
+      ? pathname === "/dashboard"
+      : pathname.startsWith(item.path);
+
+
             return (
               <button
                 key={item.name}
-                onClick={() => setActive(item.name)}
+                onClick={() => router.push(item.path)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200
                   ${isBottomActive ? "bg-black text-white" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"}
                   ${isCollapsed ? "justify-center px-2" : ""}
