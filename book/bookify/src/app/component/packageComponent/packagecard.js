@@ -6,14 +6,19 @@ import {
   Trash2,
 } from "lucide-react";
 import Button from "../uicomponents/button";
+import { useRouter } from "next/navigation";
 
 export default function PackagesCard({
+  id,
   packageName,
+  packageType,
   validity,
   createdAt,
   onEdit,
   onDelete,
 }) {
+
+  const router=useRouter();
   return (
     <div className="bg-white mb-3 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
       {/* Card Body */}
@@ -30,7 +35,7 @@ export default function PackagesCard({
             </h2>
 
             <p className="text-gray-500 text-sm font-light">
-              Recurring
+              {packageType}
             </p>
           </div>
         </div>
@@ -68,8 +73,8 @@ export default function PackagesCard({
         <Button
             variant="noVariant"
             leftIcon={Pencil}
-            className="w-full my-[-5px] px-3 font-light text-black shadow-sm hover:bg-gray-50">
-
+            className="w-full my-[-5px] px-3 font-light text-black shadow-sm hover:bg-gray-50"
+         onClick={()=>{router.push(`/dashboard/packages/${id}`)}} >
           Edit
         </Button>
 

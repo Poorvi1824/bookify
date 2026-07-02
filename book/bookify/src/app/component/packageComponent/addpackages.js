@@ -51,6 +51,7 @@ packageType: "",
 });
        
         toast.success("Package Added Successfully")
+        router.push("/dashboard/packages")
         
     };
 
@@ -261,7 +262,7 @@ event restrictions */}
         >
           Back
         </Button>
-        <Button type="submit" className="mt-6 bg-gray-600 text-white hover:bg-gray-700 shadow-md"
+        <Button type="submit" className="mt-6 bg-black text-white hover:bg-gray-700 shadow-md"
         leftIcon={Plus}
            onClick={handleSubmit}
         >

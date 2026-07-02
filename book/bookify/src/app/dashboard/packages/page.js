@@ -63,9 +63,11 @@ const Packages = () => {
         {packages.map((item) => (
           <PackagesCard
             key={item.id}
-            packageName={item.type}
-            validity={`${item.validity}`}
-            createdAt={item.created}
+            id={item.id}
+            packageName={item.packageName}
+            packageType={item.packageType}
+            validity={`${item.days}`}
+            createdAt={item.validFrom}
             onEdit={() => setBasicInfoOpen(true)}
             // onDelete={() => handleDelete(item.id)}
           />
