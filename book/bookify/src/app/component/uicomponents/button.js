@@ -142,6 +142,25 @@ const Button = ({
     lg: "px-6 py-3 text-lg",
   };
 
+
+  const renderIcon = (Icon) => {
+  if (!Icon) return null;
+
+  // If JSX (<Check />)
+  if (React.isValidElement(Icon)) {
+    return Icon;
+  }
+
+  // If Component (Check)
+  const IconComponent = Icon;
+
+  return (
+    <IconComponent
+      size={16}
+      className={iconClassName || ""}
+    />
+  );
+};
   return (
     <button
       type={type}
@@ -160,18 +179,13 @@ const Button = ({
           <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
           Loading...
         </>
-      ) : (
-        <>
-        {LeftIcon && (
-  <LeftIcon
-  size={16}
-    className={` ${iconClassName || ""}`}
-  />
-)}
-          <span>{children}</span>
-          {RightIcon && <RightIcon size={16} />}
-        </>
-      )}
+      ) : ( <>
+    {renderIcon(LeftIcon)}
+
+    <span>{children}</span>
+
+    {renderIcon(RightIcon)}
+  </>)}
     </button>
   );
 };

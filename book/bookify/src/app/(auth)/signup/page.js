@@ -7,11 +7,11 @@
 //  const [selectedType, setSelectedType] = useState(null);
 
 //     return(
-        
+
 //         <>
-        
+
 //       <div className="w-full max-w-2xl px-8 py-6 flex flex-col h-full">
-        
+
 //         {/* Top bar: Title + Step indicator */}
 //         <div className="flex items-center justify-between mb-2">
 //           <h2 className="text-black text-xl font-semibold">Account set up</h2>
@@ -25,7 +25,7 @@
 
 //         {/* Main content - centered vertically in remaining space */}
 //         <div className="flex-1 flex flex-col justify-center">
-          
+
 //           {/* Heading */}
 //           <h1 className="text-black text-3xl font-bold mb-3">Sign Up</h1>
 //           <p className="text-gray-400 text-sm font-light mb-10">
@@ -54,14 +54,14 @@
 //             >
 //               Business Gym
 //             </button>
-           
+
 //           </div>
 //            <div >
 //                 {selectedType === 'individual' &&  
 //                 <p className="text-gray-400 text-sm mt-2">I am an individual looking for a gym.</p>}
-               
-               
-               
+
+
+
 //                 {selectedType === 'business' && 
 //                 <p className="text-gray-400 text-sm mt-2">I am a business owner looking for a gym.</p>}
 //             </div>
@@ -85,9 +85,9 @@
 //         </div>
 
 //       </div>
-   
+
 //         </>
-    
+
 //     )
 // }
 // export default Signup;
@@ -102,6 +102,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 export default function SignUpPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -128,13 +129,19 @@ export default function SignUpPage() {
 
       document.cookie = `token=${token}; path=/; max-age=3600`;
 
-     // // ✅ Save user to Firestore
-      await setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        domain: domainname,
-      }, { merge: true });
+      // // ✅ Save user to Firestore
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          uid: user.uid,
+          name: name,
+          email: user.email,
+          domain: domainname,
+        },
+        { merge: true }
+      );
 
-    toast.success("Sign up successful!");
+      toast.success("Sign up successful!");
 
       router.push("/dashboard");
 
@@ -162,7 +169,7 @@ export default function SignUpPage() {
           {/* Heading */}
           <div className="flex flex-col mb-6">
             <h1 className="text-black text-3xl font-bold leading-12">Sign Up</h1>
-            
+
           </div>
 
           {/* Sign up form */}
@@ -178,6 +185,18 @@ export default function SignUpPage() {
                 autoComplete="username"
                 className="w-full mb-2 px-4 py-3 bg-white text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-sm placeholder:text-gray-400"
               />
+              <label className="text-gray-700 font-medium my-2 block">Name</label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                autoComplete="name"
+                className="w-full mb-2 px-4 py-3 text-black bg-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-sm placeholder:text-gray-400"
+              />
+
+
 
               <label className="text-gray-700 font-medium my-2 block">Email</label>
               <input

@@ -13,6 +13,8 @@ const Input = ({
   disabled = false,
   error = "",
   className = "",
+  leftIcon: LeftIcon,
+  rightIcon: RightIcon,
 }) => {
   return (
     <div className="w-full">
@@ -42,6 +44,7 @@ const Input = ({
         transition-all
         ${error ? "border-red-500" : ""}
         ${className}`}
+        
       />
 
       {error && (

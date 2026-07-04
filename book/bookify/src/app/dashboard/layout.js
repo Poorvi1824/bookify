@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Header from "../component/dashboardlayout/header";
 import Sidebar from "../component/dashboardlayout/sidebar";
-import Main from "../component/dashboardlayout/main";
+
 
 const DashboardLayout = ({ children }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }) => {
 
         {/* Content */}
         {/* Main content: pt-16 (64px = h-16) to push content below fixed header */}
-  <main className="pt-16 h-screen bg-gray-100 overflow-y-auto custom-scrollbar">
+  <main className="pt-20 h-screen bg-gray-100 overflow-y-auto custom-scrollbar px-5">
     {/* Your scrollable content goes here */}
     
       {/* Content */}

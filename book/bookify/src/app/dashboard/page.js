@@ -10,11 +10,18 @@ import GettingStarted from "../component/dashboard/getstart";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../redux/features/usersSlice";
 
+import { DayButton } from "react-day-picker";
+import { doc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { db } from "@/firebase/firebase";
+
 
 const DashboardPage = () => {
 
 
   const [active, setActive] = useState("Dashboard");
+  const [userName, setUserName] = useState("");
+
 
   const menuItems = [
     { name: "Dashboard", component: <OverviewDashboard /> },
@@ -24,6 +31,27 @@ const DashboardPage = () => {
   ]
    
  const activeComponent = menuItems.find(item => item.name === active)?.component;
+//  const currentUser = useSelector((state) => state.auth.user);
+
+
+useEffect(() => {
+    const fetchUser = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) return;
+
+     const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUserName(docSnap.data().name);
+      }
+    };
+
+    fetchUser();
+  }, []);
+console.log("User Name:", userName);
 
   const dispatch = useDispatch();
 
@@ -42,7 +70,7 @@ const DashboardPage = () => {
 
 
   return (
-    <div className="w-full h-screen bg-gray-100">
+    <div className="w-full  bg-gray-100">
       <div className="w-full flex flex-col h-40 bg-white pt-8 px-">
 
         {/* Top Row: Logo and Welcome Message */}
@@ -51,9 +79,9 @@ const DashboardPage = () => {
             <Building2 className="h-10 w-10 text-gray-500 " />
           </div>
           <div className="flex flex-col">
-            {userlist.length > 0 && (
-              <span className="text-black text-xl font-semibold">Hello, {userlist[0].name}</span>
-            )}
+           
+              <span className="text-black text-xl font-semibold">Hello, {userName}</span>
+            
             <span className="text-gray-500 text-sm">Fitness Gym</span>
           </div>
         </div>
