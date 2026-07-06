@@ -4,7 +4,7 @@
 import react from 'react';
 import Button from '@/app/component/uicomponents/button';
 import { fetchStaff } from '@/app/redux/features/booking/StaffSlice';
-import { Calendar, List, RefreshCcw, UserPlus, Users, CircleDollarSign, UserCheck } from 'lucide-react';
+import { Calendar, List, RefreshCcw, UserPlus, Users, CircleDollarSign, UserCheck, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment } from "react";
@@ -102,11 +102,11 @@ const handleRefresh = async () => {
 
                     <Button
                         variant="dark"
-                        leftIcon={UserPlus}
+                        leftIcon={Plus}
                         className="bg-black py-2 px-3 font-light text-white shadow-sm"
                         onClick={() => setIsModalOpen(true)}
                     >
-                        Add client
+                      New Booking
                     </Button>
                 </div>
 

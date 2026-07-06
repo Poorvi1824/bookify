@@ -18,7 +18,7 @@ const FilterToolbar = ({ filters, setFilters }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap items-center gap-2">
 
 
       <FilterDropdown
@@ -48,12 +48,14 @@ const FilterToolbar = ({ filters, setFilters }) => {
   onChange={(value) => updateFilter("gateway", value)}
   options={gatewayOptions}
 />
-<DateRangeFilter
-  value={filters.dateRange}
-  onChange={(range) =>
-    updateFilter("dateRange", range)
-  }
-/>
+<div className="flex items-center gap-3">
+    <div className="w-px h-6 bg-gray-300"></div>
+
+    <DateRangeFilter
+      value={filters.dateRange}
+      onChange={(range) => updateFilter("dateRange", range)}
+    />
+</div>
 
       {/* <FilterDropdown
         title="Status"

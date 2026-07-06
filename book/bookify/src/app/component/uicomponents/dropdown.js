@@ -38,10 +38,25 @@ const FilterDropdown = ({
       {/* Button */}
       <Button
         onClick={() => setOpen(!open)}
-        className="w-[150px] flex items-center justify-between gap-2 py-1 px-1 rounded-full bg-gray-100 text-gray-700 text-sm shadow-sm hover:shadow-sm transition-all duration-300"
+        className=" h-9
+    min-w-fit
+    px-4
+    border
+    border-gray-200
+    bg-gray-50
+    rounded-full
+    flex
+    items-center
+    justify-between
+    gap-2
+    text-sm
+    font-light
+    text-gray-800
+    hover:bg-gray-50
+    transition"
         rightIcon={
           <ChevronDown
-            size={18}
+            size={16}
             className={`transition-transform duration-300 ${open ? "rotate-180" : ""
               }`}
           />
@@ -53,7 +68,19 @@ const FilterDropdown = ({
       {/* Dropdown */}
       {open && (
         <div
-          className="absolute left-0 mt-3 w-full rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden z-50"
+          className="
+absolute
+left-0
+mt-2
+w-full
+rounded-xl
+border
+border-gray-200
+bg-white
+shadow-lg
+overflow-hidden
+z-50
+"
         >
           {options.map((option) => (
             <Button
@@ -62,7 +89,7 @@ const FilterDropdown = ({
                 onChange(option.value);
                 setOpen(false);
               }}
-              className="w-full flex items-start justify-start px-3 py-3 rounded-full hover:bg-gray-100 transition-all duration-200 text-left"
+              className="w-full flex items-center  py-2 text-sm hover:bg-gray-50 transition"
 
               leftIcon={
                 option.color ? (

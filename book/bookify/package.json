@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
+    "@tanstack/react-table": "^8.21.3",
     "date-fns": "^4.4.0",
     "firebase": "^12.11.0",
     "lucide-react": "^0.410.0",

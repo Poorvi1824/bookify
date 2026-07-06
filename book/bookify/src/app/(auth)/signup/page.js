@@ -153,9 +153,9 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="h-screen w-full bg-gray-100 items-center flex flex-col">
+    <div className="h-screen w-full bg-gray-100 items-center ">
       <div className="h-screen w-full bg-gray-100 items-center flex flex-col">
-        <div className="h-screen w-[500px] flex flex-col mt-20">
+        <div className="h-screen w-[500px] flex flex-col mt-5">
 
           {/* Progress bar */}
           {/* <div className="flex items-center justify-between mb-2">

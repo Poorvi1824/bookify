@@ -1,8 +1,28 @@
 "use client"
 
 import FilterToolbar from "@/app/component/filterToolBar/fillterToolbar";
+import TransactionTable from "@/app/component/transactionCopmonent/transactionTable";
 import { Search } from "lucide-react";
 import react, { useState } from "react";
+
+
+export const transactionColumns = [
+  {
+    accessorKey: "id",
+    header: "Order ID",
+  },
+  {
+    accessorKey: "user",
+    header: "User",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <StatusBadge status={row.original.status} />
+    ),
+  },
+];
 
 const Transactions = () => {
 
@@ -29,15 +49,7 @@ const [filters, setFilters] = useState({
           <h1 className="text-xl font-bold mb-4">Transactions</h1>
         </div>
         </div>
-         {/* <div className="relative">
-           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>  */}
+        
 <div className=" w-full  flex gap-1 mt-2">
   
   <FilterToolbar
@@ -58,6 +70,8 @@ const [filters, setFilters] = useState({
     className="w-[300px] border border-gray-300 rounded-lg pl-10 pr-3 py-2"
   />
 </div>
+
+<TransactionTable filters={filters} />
 
     </div>
 
