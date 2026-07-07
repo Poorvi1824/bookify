@@ -38,9 +38,9 @@ const Members = () => {
   return (
     <div className="p-6 m-6 bg-white rounded-lg shadow-md">
 
-<div className="w-full flex justify-between h-15  pt-2 px-6 mb-4 gap-4">
+<div className="w-full flex justify-between   pt-2 px-6 pb-4 gap-4">
   <div className=" flex gap-4 items center">
-      <h1 className="text-2xl font-bold mb-4">Gym Members ({userlist.length})</h1> 
+      <h1 className="text-2xl font-bold">Gym Members ({userlist.length})</h1> 
       <button className="bg-black text-white  text-sm px-3  rounded-lg ">
        
         Invite  (+)
