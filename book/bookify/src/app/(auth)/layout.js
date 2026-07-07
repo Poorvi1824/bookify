@@ -49,7 +49,7 @@ export default function AuthLayout({ children }) {
 
         {/* Girl Image */}
         <img
-          src="/fitness-girl.png"
+          src="/girl-workout.png"
           alt="Fitness"
           className="
             absolute

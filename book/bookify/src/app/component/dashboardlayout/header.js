@@ -1,26 +1,32 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
 
 import { MessageCircle, Mail, Phone, Bell, MapPin, LogOut } from "lucide-react";
+import LogoutDialog from "../logout/logoutDialog";
 
 
 const Header = ({ isCollapsed }) => {
   const router = useRouter();
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
 
-  const handleLogout = async () => {
+
+   // Step 1: Just open the dialog (don't logout yet)
+  const handleLogoutClick = () => {
+    setShowLogoutDialog(true);
+  };
+
+  // Step 2: Actually logout when user confirms
+  const handleConfirmLogout = async () => {
     try {
       await signOut(auth);
-
-      // Remove token cookie
-      document.cookie =
-        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-
+      document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      setShowLogoutDialog(false);
       router.push("/login");
     } catch (error) {
       console.error("Logout Error:", error);
@@ -86,11 +92,17 @@ const Header = ({ isCollapsed }) => {
         </div>
         {/* Logout */}
         <button
-          onClick={handleLogout}
+           onClick={handleLogoutClick}  // ← changed from handleLogout
           className="px-3 py-1.5 rounded-lg text-red-500 hover:bg-red-50 transition"
         >
           <LogOut className="w-5 h-5" />
         </button>
+          {/* Confirmation Dialog */}
+      <LogoutDialog
+        isOpen={showLogoutDialog}
+        onClose={() => setShowLogoutDialog(false)}
+        onConfirm={handleConfirmLogout}
+      />
       </div>
     </div>
   );
