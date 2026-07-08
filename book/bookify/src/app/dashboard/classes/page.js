@@ -1,5 +1,6 @@
 "use client"
 
+import AddClasses from "@/app/component/classesComponent/addClasses"
 import DraftClasses from "@/app/component/classesComponent/draftClasses"
 import PastClasses from "@/app/component/classesComponent/pastClasses"
 import ScheduledClasses from "@/app/component/classesComponent/scheduledClasses"
@@ -10,6 +11,7 @@ import react, { useState } from "react"
 
 const Classes = () => {
     const [active, setActive] = useState("Draft Classes");
+     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
 
@@ -29,10 +31,12 @@ const Classes = () => {
                     <h1 className="text-2xl font-bold ">Class Management </h1>
                     <Button className="bg-black text-white text-15 px-1  rounded-lg  py-0"
                         rightIcon={Plus}
+                        onClick={() => setIsModalOpen(true)}
                     >
 
                         Create New Class
                     </Button></div></div>
+                      <AddClasses isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                     
                     
                     

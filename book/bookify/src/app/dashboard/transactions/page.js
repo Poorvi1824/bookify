@@ -1,9 +1,12 @@
 "use client"
 
 import FilterToolbar from "@/app/component/filterToolBar/fillterToolbar";
-import TransactionTable from "@/app/component/transactionCopmonent/transactionTable";
+
+import { columns } from "./columns";
+import { transactionData } from "./data";
 import { Search } from "lucide-react";
 import react, { useState } from "react";
+import DataTable from "@/app/component/DataTable/DataTable";
 
 
 export const transactionColumns = [
@@ -71,7 +74,10 @@ const [filters, setFilters] = useState({
   />
 </div>
 
-<TransactionTable filters={filters} />
+<DataTable
+  columns={columns}
+  data={transactionData}
+/>
 
     </div>
 
