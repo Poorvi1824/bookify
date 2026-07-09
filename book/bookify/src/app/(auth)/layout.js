@@ -54,8 +54,8 @@ export default function AuthLayout({ children }) {
           className="
             absolute
             bottom-0
-            right-[-120px]
-            w-[700px]
+            right-[0]
+            w-[500px]
             object-contain
             pointer-events-none
           "

@@ -6,6 +6,7 @@ import { auth, db } from "../../../firebase/firebase";
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Button from "@/app/component/uicomponents/button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -131,9 +132,13 @@ export default function LoginPage() {
                 )}
 
 
-                <div className="flex flex-col justify-end mt-4">
-                  <span className="text-black font-semibold text-text15 text-end hover:underline tracking-wide">forgot password</span>
-                  <span className="text-black font-semibold text-text15 text-end hover:underline tracking-wide">forgot company name?</span>
+                <div className="flex flex-col justify-end  justify=-end mt-4">
+
+                  < Button
+                    onClick={() => router.push("/forgotPassword")}
+                  className="text-black font-semibold text-text15 text-end hover:underline tracking-wide">forgot password</Button>
+                  <Button 
+                    onClick={() => router.push("/signup")} className="text-black font-semibold text-text15 text-end hover:underline tracking-wide">forgot company name?</Button>
 
 
                 </div>
@@ -158,13 +163,13 @@ export default function LoginPage() {
                   Don't have an account?
                 </span>
 
-                <button
+                <Button
                   type="button"
                   onClick={() => router.push("/signup")}
                   className="ml-2 text-black hover:underline"
                 >
                   Sign Up
-                </button>
+                </Button>
               </div>
             </div>
 
