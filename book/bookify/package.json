@@ -11,6 +11,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
     "@tanstack/react-table": "^8.21.3",
+    "country-currency-map": "^2.1.7",
     "date-fns": "^4.4.0",
     "firebase": "^12.11.0",
     "lucide-react": "^0.410.0",
@@ -18,7 +19,10 @@
     "react": "19.2.4",
     "react-day-picker": "^10.0.1",
     "react-dom": "19.2.4",
+    "react-icons": "^5.7.0",
     "react-redux": "^9.3.0",
+    "react-select": "^5.10.2",
+    "react-timezone-select": "^3.3.3",
     "react-toastify": "^11.1.0",
     "recharts": "^3.9.2",
     "tailwind-scrollbar": "^4.0.2"

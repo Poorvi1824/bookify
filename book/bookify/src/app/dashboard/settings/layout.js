@@ -6,8 +6,8 @@ export default function SettingsLayout({ children }) {
     <div className="flex h-full">
       <SettingsSidebar />
 
-      <main className="flex-1 bg-[#F7F8FC] overflow-y-auto">
-        <div className="p-10">
+      <main className="flex-1 bg-[#F7F8FF] overflow-y-auto">
+        <div className="px-15 py-10">
           {children}
         </div>
       </main>

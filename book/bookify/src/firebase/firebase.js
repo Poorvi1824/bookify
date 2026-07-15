@@ -8,6 +8,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+import { getStorage } from "firebase/storage";
+
+
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDWJpk0GBo2fKo0yK_b41BIp4wovQXKFkY",
   authDomain: "bookifydb-c190d.firebaseapp.com",

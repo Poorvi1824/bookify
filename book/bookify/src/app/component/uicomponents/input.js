@@ -13,20 +13,28 @@ const Input = ({
   disabled = false,
   error = "",
   className = "",
-  leftIcon: LeftIcon,
-  rightIcon: RightIcon,
+  leftIcon,
+  rightIcon,
 }) => {
   return (
     <div className="w-full">
       {label && (
-        <label
-          htmlFor={name}
-          className="block mb-2 text-sm font-medium text-gray-700"
-        >
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      )}
+  <label
+    htmlFor={name}
+    className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-700"
+  >
+    {leftIcon && (
+      <span className="text-gray-500">
+        {leftIcon}
+      </span>
+    )}
+
+    <span>
+      {label}
+      {required && <span className="text-red-500 ml-1">*</span>}
+    </span>
+  </label>
+)}
 
       <input
         id={name}
@@ -43,7 +51,9 @@ const Input = ({
        
         transition-all
         ${error ? "border-red-500" : ""}
-        ${className}`}
+        ${className}
+        ${disabled ? "bg-gray-200 text-gray-500":""}`}
+        
         
       />
 

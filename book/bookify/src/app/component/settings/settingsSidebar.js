@@ -33,7 +33,11 @@ const SettingsSidebar = () => {
               >
                 <Icon size={18} />
 
-                <span className="font-medium text-sm text-gray-500">
+                <span className={`font-medium text-sm text-gray-500  ${
+                  active
+                    ? "bg-black text-white"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}>
                   {item.title}
                 </span>
               </Link>

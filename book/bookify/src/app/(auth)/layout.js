@@ -1,12 +1,12 @@
 export default function AuthLayout({ children }) {
   return (
-    <div className="min-h-screen flex bg-gray-100">
+    <div className="min-h-screen flex bg-gray-100 relative">
 
       {/* Left Section */}
-      <div className="relative w-[40%] min-h-screen bg-black overflow-hidden">
+      <div className=" w-[40%] min-h-screen bg-black overflow-hidden">
 
         {/* Decorative Dots */}
-        <div className="absolute top-8 right-8 grid grid-cols-3 gap-3">
+        <div className="absolute top-8 right-235 grid grid-cols-3 gap-3">
           {Array.from({ length: 9 }).map((_, i) => (
             <span
               key={i}
@@ -54,7 +54,7 @@ export default function AuthLayout({ children }) {
           className="
             absolute
             bottom-0
-            right-[0]
+            right-[850px]
             w-[500px]
             object-contain
             pointer-events-none
